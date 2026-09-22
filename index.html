@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>สมุดบันทึกงาน</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       หน้าแรก
+  ========================== -->
+
+  <div id="homePage" class="page">
+
+    <div class="welcome-box">
+
+      <div class="book-icon">📚</div>
+
+      <h1>สมุดบันทึกงาน</h1>
+
+      <p class="subtitle">
+        บันทึกงานและการบ้านที่ต้องส่ง
+      </p>
+
+
+      <button
+        class="main-button"
+        onclick="showRegister()">
+        สมัครสมาชิก
+      </button>
+
+
+      <p class="switch-text">
+        มีบัญชีอยู่แล้ว?
+        <button
+          class="link-button"
+          onclick="showLogin()">
+          เข้าสู่ระบบ
+        </button>
+      </p>
+
+
+      <div class="guest-line"></div>
+
+      <button
+        class="guest-button"
+        onclick="guestLogin()">
+        เข้าใช้งานโดยไม่ลงชื่อเข้าใช้
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       สมัครสมาชิก
+  ========================== -->
+
+  <div id="registerPage" class="page hidden">
+
+    <div class="form-box">
+
+      <div class="small-icon">📝</div>
+
+      <h1>สมัครสมาชิก</h1>
+
+      <p class="subtitle">
+        สร้างบัญชีเพื่อบันทึกงานของคุณ
+      </p>
+
+
+      <label>ชื่อผู้ใช้</label>
+
+      <input
+        type="text"
+        id="regUser"
+        placeholder="ตั้งชื่อผู้ใช้">
+
+
+      <label>รหัสผ่าน</label>
+
+      <input
+        type="password"
+        id="regPass"
+        placeholder="ตั้งรหัสผ่าน">
+
+
+      <label>ยืนยันรหัสผ่าน</label>
+
+      <input
+        type="password"
+        id="regConfirm"
+        placeholder="กรอกรหัสผ่านอีกครั้ง">
+
+
+      <p
+        id="regError"
+        class="error">
+      </p>
+
+
+      <button
+        class="main-button"
+        onclick="register()">
+        สมัครสมาชิก
+      </button>
+
+
+      <p class="switch-text">
+
+        มีบัญชีอยู่แล้ว?
+
+        <button
+          class="link-button"
+          onclick="showLogin()">
+          เข้าสู่ระบบ
+        </button>
+
+      </p>
+
+
+      <button
+        class="back-button"
+        onclick="showHome()">
+        ← กลับหน้าหลัก
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       เข้าสู่ระบบ
+  ========================== -->
+
+  <div id="loginPage" class="page hidden">
+
+    <div class="form-box">
+
+      <div class="small-icon">🔐</div>
+
+      <h1>เข้าสู่ระบบ</h1>
+
+      <p class="subtitle">
+        เข้าสู่บัญชีของคุณ
+      </p>
+
+
+      <label>ชื่อผู้ใช้</label>
+
+      <input
+        type="text"
+        id="loginUser"
+        placeholder="ชื่อผู้ใช้">
+
+
+      <label>รหัสผ่าน</label>
+
+      <input
+        type="password"
+        id="loginPass"
+        placeholder="รหัสผ่าน">
+
+
+      <p
+        id="loginError"
+        class="error">
+      </p>
+
+
+      <button
+        class="main-button"
+        onclick="login()">
+        เข้าสู่ระบบ
+      </button>
+
+
+      <p class="switch-text">
+
+        ยังไม่มีบัญชี?
+
+        <button
+          class="link-button"
+          onclick="showRegister()">
+          สมัครสมาชิก
+        </button>
+
+      </p>
+
+
+      <button
+        class="guest-button"
+        onclick="guestLogin()">
+        เข้าใช้งานโดยไม่ลงชื่อเข้าใช้
+      </button>
+
+
+      <button
+        class="back-button"
+        onclick="showHome()">
+        ← กลับหน้าหลัก
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       หน้าหลักของแอป
+  ========================== -->
+
+  <div id="mainPage" class="hidden">
+
+    <header class="top-header">
+
+      <div>
+        <h1>📚 สมุดบันทึกงาน</h1>
+        <p>Homework Note</p>
+      </div>
+
+
+      <div class="header-right">
+
+        <span id="currentUser"></span>
+
+        <button
+          class="logout-button"
+          onclick="logout()">
+          ออกจากระบบ
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <main class="container">
+
+      <section class="intro">
+
+        <div>
+
+          <h2>งานของฉัน</h2>
+
+          <p>
+            บันทึกงานที่ต้องส่ง จะได้ไม่ลืม
+          </p>
+
+        </div>
+
+
+        <div class="count-box">
+
+          <span id="workCount">0</span>
+
+          <small>
+            งานที่ยังไม่เสร็จ
+          </small>
+
+        </div>
+
+      </section>
+
+
+      <div class="add-area">
+
+        <button
+          class="add-button"
+          onclick="openAdd()">
+          ＋ เพิ่มงาน
+        </button>
+
+      </div>
+
+
+      <section class="tools">
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="🔍 ค้นหางาน...">
+
+
+        <select id="subjectFilter">
+
+          <option value="">
+            ทุกวิชา
+          </option>
+
+          <option value="คณิตศาสตร์">
+            คณิตศาสตร์
+          </option>
+
+          <option value="วิทยาศาสตร์">
+            วิทยาศาสตร์
+          </option>
+
+          <option value="ฟิสิกส์">
+            ฟิสิกส์
+          </option>
+
+          <option value="เคมี">
+            เคมี
+          </option>
+
+          <option value="ชีววิทยา">
+            ชีววิทยา
+          </option>
+
+          <option value="ภาษาไทย">
+            ภาษาไทย
+          </option>
+
+          <option value="ภาษาอังกฤษ">
+            ภาษาอังกฤษ
+          </option>
+
+          <option value="สังคมศึกษา">
+            สังคมศึกษา
+          </option>
+
+          <option value="อื่น ๆ">
+            อื่น ๆ
+          </option>
+
+        </select>
+
+      </section>
+
+
+      <section class="task-section">
+
+        <div class="section-title">
+
+          <h2>
+            📌 งานที่ต้องทำ
+          </h2>
+
+        </div>
+
+        <div id="taskList"></div>
+
+      </section>
+
+
+      <section class="task-section">
+
+        <div class="section-title">
+
+          <h2>
+            ✓ งานที่เสร็จแล้ว
+          </h2>
+
+        </div>
+
+        <div id="finishedList"></div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- =========================
+       หน้าต่างเพิ่มงาน
+  ========================== -->
+
+  <div id="taskModal" class="modal">
+
+    <div class="modal-box">
+
+      <div class="modal-header">
+
+        <h2 id="modalTitle">
+          เพิ่มงาน
+        </h2>
+
+        <button
+          class="close-button"
+          onclick="closeModal()">
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="taskForm">
+
+        <input
+          type="hidden"
+          id="editId">
+
+
+        <label>ชื่องาน</label>
+
+        <input
+          type="text"
+          id="taskName"
+          placeholder="เช่น ทำแบบฝึกหัดบทที่ 3"
+          required>
+
+
+        <label>วิชา</label>
+
+        <select
+          id="taskSubject"
+          required>
+
+          <option value="">
+            เลือกวิชา
+          </option>
+
+          <option value="คณิตศาสตร์">
+            คณิตศาสตร์
+          </option>
+
+          <option value="วิทยาศาสตร์">
+            วิทยาศาสตร์
+          </option>
+
+          <option value="ฟิสิกส์">
+            ฟิสิกส์
+          </option>
+
+          <option value="เคมี">
+            เคมี
+          </option>
+
+          <option value="ชีววิทยา">
+            ชีววิทยา
+          </option>
+
+          <option value="ภาษาไทย">
+            ภาษาไทย
+          </option>
+
+          <option value="ภาษาอังกฤษ">
+            ภาษาอังกฤษ
+          </option>
+
+          <option value="สังคมศึกษา">
+            สังคมศึกษา
+          </option>
+
+          <option value="อื่น ๆ">
+            อื่น ๆ
+          </option>
+
+        </select>
+
+
+        <label>กำหนดส่ง</label>
+
+        <input
+          type="date"
+          id="taskDate"
+          required>
+
+
+        <label>รายละเอียดเพิ่มเติม</label>
+
+        <textarea
+          id="taskDetail"
+          rows="4"
+          placeholder="รายละเอียดของงาน (ถ้ามี)">
+        </textarea>
+
+
+        <button
+          type="submit"
+          class="save-button">
+          บันทึกงาน
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
